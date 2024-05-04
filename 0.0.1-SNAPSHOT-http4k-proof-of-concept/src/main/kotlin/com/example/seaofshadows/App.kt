@@ -1,18 +1,14 @@
 package com.example.seaofshadows
 
 import com.github.jdw.seaofshadows.core.MeansOfCommunication
-import com.github.jdw.seaofshadows.core.Session
 import com.github.jdw.seaofshadows.core.Settings
 import com.github.jdw.seaofshadows.core.api.Constants
 import com.github.jdw.seaofshadows.core.messages.Render
-import com.github.jdw.seaofshadows.webgl1.Payloads
-import kotlinx.coroutines.async
+import com.github.jdw.seaofshadows.webgl1.Payload
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.encodeToByteArray
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.protobuf.ProtoBuf
 import org.http4k.websocket.Websocket
 import org.http4k.websocket.WsMessage
@@ -74,7 +70,7 @@ class App {
 
             websocket
                 .also {
-                    val payload = ProtoBuf.encodeToByteArray(Payloads.ClearColor(0.0F, 0.0F,0.0F, 1F))
+                    val payload = ProtoBuf.encodeToByteArray(Payload.ClearColor(0.0F, 0.0F,0.0F, 1F))
                     val message = Render.Message(
                         id = settings.expectedCanvasIds.first(),
                         method = Render.Method.CLEAR_COLOR,
@@ -111,7 +107,7 @@ class App {
 //                    }
 //                }
                 .also {
-                    val payload = ProtoBuf.encodeToByteArray(Payloads.Clear(Constants.COLOR_BUFFER_BIT))
+                    val payload = ProtoBuf.encodeToByteArray(Payload.Clear(Constants.COLOR_BUFFER_BIT))
                     state = 1
                     val message = Render.Message(
                         id = settings.expectedCanvasIds.first(),

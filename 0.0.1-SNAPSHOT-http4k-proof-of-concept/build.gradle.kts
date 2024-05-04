@@ -72,7 +72,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-protobuf:$kotlinxSerializationVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinxCoroutinesVersion")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
-    implementation("com.github.jdw.seaofshadows:core:$seaOfShadowsVersion")
-    implementation("com.github.jdw.seaofshadows:canvas-webgl:$seaOfShadowsVersion")
+    implementation("com.github.jdw.seaofshadows:seaofshadows-core:$seaOfShadowsVersion")
+    implementation("com.github.jdw.seaofshadows:seaofshadows-canvas-webgl:$seaOfShadowsVersion")
 }
 

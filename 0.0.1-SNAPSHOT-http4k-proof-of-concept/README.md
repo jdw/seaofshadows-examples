@@ -5,8 +5,7 @@ Starting of with [this](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_A
 ## Steps for running
 ### Check out Sea of Shadows repository
 ```shell
-cd ../..
-git clone git@github.com:jdw/seaofshadows.git
+cd ../.. && git clone git@github.com:jdw/seaofshadows.git
 ```
 
 ### Check out 0.0.1-SNAPSHOT commit
@@ -30,12 +29,17 @@ cd ../../seaofshadows && ./gradlew :seaofshadows-terminal:jsBrowserProductionWeb
 cp ../../seaofshadows/terminal/output/seaofshadows-terminal.js src/main/resources/static
 ```
 
+### Publish to Maven local
+```shell
+cd ../../seaofshadows && ./gradlew publishToMavenLocal
+```
+
 ### Copy terminal JS file to resources/static folder for serving
 ```shell
 ./gradlew shadowJar
 ```
 
-### Run the compiled ûberJAR
+### Run the compiled überJAR
 ```shell
 java -jar build/libs/0.0.1-SNAPSHOT-http4k-proof-of-concept.jar
 ```

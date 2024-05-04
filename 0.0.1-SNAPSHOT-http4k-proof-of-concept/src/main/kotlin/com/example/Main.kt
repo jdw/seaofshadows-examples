@@ -2,7 +2,6 @@ package com.example
 
 import com.example.seaofshadows.App
 import com.github.jdw.seaofshadows.core.MeansOfCommunication
-import com.github.jdw.seaofshadows.core.Session
 import com.github.jdw.seaofshadows.core.generateSession
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
@@ -17,7 +16,6 @@ import org.http4k.routing.ws.bind
 import org.http4k.server.PolyHandler
 import org.http4k.server.Undertow
 import org.http4k.server.asServer
-import org.http4k.websocket.Websocket
 import org.http4k.websocket.WsResponse
 
 fun handler(): PolyHandler {

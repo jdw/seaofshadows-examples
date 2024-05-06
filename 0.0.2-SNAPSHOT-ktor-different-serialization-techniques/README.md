@@ -1,4 +1,5 @@
-# Ktor different serialization techniques
+# Sea of Shadows example #2
+## Ktor different serialization techniques
 ### A first try
 Starting of with [this](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/Tutorial/Getting_started_with_WebGL) tutorial!
 
@@ -15,18 +16,18 @@ cd ../../seaofshadows && git checkout <TODO>
 
 ### Build terminal javascript file
 ```shell
-cd ../../seaofshadows && ./gradlew :seaofshadows-terminal:jsBrowserDevelopmentWebpack
+./gradlew jsBrowserDevelopmentWebpack
 ```
 
 #### or
 
 ```shell
-cd ../../seaofshadows && ./gradlew :seaofshadows-terminal:jsBrowserProductionWebpack
+./gradlew jsBrowserProductionWebpack
 ```
 
-### Copy terminal JS file to resources/static folder for serving
+### Copy terminal JS file to files folder for serving
 ```shell
-cp ../../seaofshadows/terminal/output/seaofshadows-terminal.js files
+cp -f output/seaofshadows-terminal.js files
 ```
 
 ### Publish library to Maven local

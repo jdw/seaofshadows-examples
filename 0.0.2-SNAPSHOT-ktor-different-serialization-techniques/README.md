@@ -11,7 +11,7 @@ cd ../.. && git clone git@github.com:jdw/seaofshadows.git
 
 ### Check out 0.0.2-SNAPSHOT commit
 ```shell
-cd ../../seaofshadows && git checkout <TODO>
+cd ../../seaofshadows && git checkout aebc84eda1dbb732e365d728fd814f52c7c097d7
 ```
 
 ### Build terminal javascript file
@@ -23,11 +23,6 @@ cd ../../seaofshadows && git checkout <TODO>
 
 ```shell
 ./gradlew jsBrowserProductionWebpack
-```
-
-### Copy terminal JS file to files folder for serving
-```shell
-cp -f output/seaofshadows-terminal.js files
 ```
 
 ### Publish library to Maven local

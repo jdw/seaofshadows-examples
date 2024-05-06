@@ -16,9 +16,13 @@ import io.ktor.websocket.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.launch
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.decodeFromByteArray
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.protobuf.ProtoBuf
 import java.time.Duration
 
+@OptIn(ExperimentalSerializationApi::class)
 fun Application.configureSockets() {
     install(WebSockets) {
         pingPeriod = Duration.ofSeconds(15)
@@ -73,7 +77,11 @@ fun Application.configureSockets() {
                         println("Received Frame.Text: $this")
                         this.readText().let { text ->
                             try {
-                                val rm: ResultMessage = Json.decodeFromString(text)
+                                val rm: ResultMessage = when (serializationTarget!!) {
+                                    SerializationTarget.JSON -> Json.decodeFromString(text)
+                                    SerializationTarget.PROTOBUF -> ProtoBuf.decodeFromByteArray(text.encodeToByteArray())
+                                }
+
                                 println("Succeeded in receiving a ResultMessage!")
                                 renderChannel.send(text)
                             }

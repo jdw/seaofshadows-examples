@@ -34,7 +34,7 @@ cp ../../seaofshadows/terminal/output/seaofshadows-terminal.js src/main/resource
 cd ../../seaofshadows && ./gradlew publishToMavenLocal
 ```
 
-### Copy terminal JS file to resources/static folder for serving
+### Compile überJAR
 ```shell
 ./gradlew shadowJar
 ```

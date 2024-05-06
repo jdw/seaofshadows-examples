@@ -32,7 +32,7 @@ kotlin {
     js(IR) {
         browser {
             commonWebpackConfig {
-                outputPath = File("${project.projectDir}/output")
+                outputPath = File("${project.projectDir}/files")
                 outputFileName = "seaofshadows-terminal.js"
             }
         }
@@ -91,7 +91,7 @@ java {
 tasks.forEach { task ->
     if (task.name == "clean") {
         task.doFirst {
-            delete(setOf("${task.project.projectDir}/output"))
+            delete(setOf("${task.project.projectDir}/files/seaofshadows-terminal.js", "${task.project.projectDir}/files/seaofshadows-terminal.js.map"))
         }
     }
 }

@@ -134,13 +134,5 @@ class App {
             println("Done rendering. Closing socket...")
             websocket.close(WsStatus.NORMAL)
         }
-
-        fun sendText(websocket: Websocket) {
-            val json = """{"testing": 1, "testingAgian": "random string"}"""
-            websocket
-                .also {
-                    it.send(WsMessage(json))
-                }
-        }
     }
 }

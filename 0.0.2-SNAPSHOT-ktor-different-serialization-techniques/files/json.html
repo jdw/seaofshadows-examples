@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Sea of Shadows HTTP4k clear color example</title>
+    <script>
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+
+        async function fetchSettings(url) {
+           const response = await fetch(url);
+
+            return response.json();
+        }
+
+        async function main() {
+            var settings = await fetchSettings("/seaofshadows/settings");
+
+            console.log(settings);
+
+            var ws = new WebSocket("ws://0.0.0.0:8080"+settings.endpoints.WEBSOCKET);
+            ws.onopen = function() { console.log('connection established') };
+            ws.onclose = function() { console.log('connection closed') };
+            ws.onerror = function(err) { console.log('error: ', err)};
+
+            while (ws.readyState !== 1) { // uglies damn klåparhack?
+                await delay(1);
+            }
+            ws.send("TALK_JSON")
+
+            var gl = document.getElementById("seaofshadows-canvas-1").getContext("webgl")
+            if (null !== gl) {
+                ws.send("CONTEXT_WEBGL1_OK")
+            }
+
+            ws.onmessage = async function(message) {
+                console.log(message);
+                var json = JSON.parse(message.data);
+                var result = "OK"
+                console.log(json)
+                try {
+                    if (json.method == "CLEAR_COLOR") {
+                        var params = JSON.parse(json.parameters)
+                        gl.clearColor(params[0], params[1], params[2], params[3])
+                    }
+                    else if (json.method == "CLEAR") {
+                        var mask = JSON.parse(json.parameters)
+                        gl.clear(mask)
+                    }
+                    else {
+                        console.error("Unknown method: " + json.method)
+                        result = "Unknown method: " + json.method
+                    }
+                }
+                catch (error) {
+                    result = error.message
+                }
+
+                if (result !== "OK") {
+                    console.error(result)
+                    result = JSON.stringify(result)
+                }
+                var obj = {"value": result, "state": json.state}
+                ws.send(JSON.stringify(obj))
+            }
+        }
+    </script>
+</head>
+
+<body onload="main()">
+<h1>Sea of Shadows</h1>
+<h2>HTTP4k clear color example - Talking JSON</h2>
+<canvas id="seaofshadows-canvas-1" width="640" height="480"></canvas>
+</body>
+</html>
